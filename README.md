@@ -10,3 +10,5 @@ EJS: Templating engine for rendering views
 Lowdb: Simple JSON database for local storage
 NeDB: Lightweight NoSQL database for persistence
 Feel free to dissect and mutilate the code for your own goals!
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+npm run start || node app.js
