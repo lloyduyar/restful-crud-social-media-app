@@ -1,1 +1,17 @@
-
+[
+  {
+    "_id": "liyn03OpkyNgjiQoK017ahGHal2dm6QF",
+    "session": {
+      "cookie": {
+        "originalMaxAge": 18000000,
+        "expires": "2024-09-22T04:32:24.233Z",
+        "httpOnly": true,
+        "path": "/"
+      },
+      "newuser": "nelly355",
+      "newUserBool": true,
+      "user": "nelly355"
+    },
+    "expires": 1744961544233
+  }
+]
