@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "QuBKCL-Zr5AMU-ks9Cz-qbaJc0a5YC8F",
+    "session": {
+      "cookie": {
+        "originalMaxAge": 17999999,
+        "expires": "2024-03-02T14:39:01.607Z",
+        "httpOnly": true,
+        "path": "/"
+      },
+      "newuser": "dennis",
+      "newUserBool": true,
+      "user": "dennis"
+    },
+    "expires": 1727372341608
+  },
+  {
+    "_id": "-bqxfUw1CmDUG37RuKXdQBtWGpQYi7Qr",
+    "session": {
+      "cookie": {
+        "originalMaxAge": 17999993,
+        "expires": "2024-08-01T17:46:04.477Z",
+        "httpOnly": true,
+        "path": "/"
+      },
+      "newuser": "stevennaismith23",
+      "newUserBool": true,
+      "user": "stevennaismith23"
+    },
+    "expires": 1740516364484
+  },
+  {
+    "_id": "scIqwsRzE4a5l67ri9ubTdwFak9su53x",
+    "session": {
+      "cookie": {
+        "originalMaxAge": 17999999,
+        "expires": "2024-08-03T13:05:03.031Z",
+        "httpOnly": true,
+        "path": "/"
+      },
+      "newuser": "dennis",
+      "newUserBool": true,
+      "user": "dennis"
+    },
+    "expires": 1740672303032
+  }
+]

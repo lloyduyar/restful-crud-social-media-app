@@ -1,0 +1,40 @@
+USERS POSTS STRUCTUREfa-spin
+
+
+post:
+    id: unique post id,
+    author:
+        id: users id who created the post,
+    --visible | username: username of user who created post
+    -- visible| pfp: users profile picture who created the post
+    content: 
+     --visible|   text: post text
+    -- visible|   image: image 64 bit url string 
+    -- visible|   timeStamp: time post was created
+    -- visible|   likes: number of likes of a post
+    -- visible|   comments: [] comments with usernames and time comment was made
+     --visible|   topics: [] topics that user tags the post with Example: Technology, Music;
+     --visible|   hashtags: [] custom hashtags by users
+
+
+
+
+---------------------------------------------------
+              socket.io chat feature
+
+
+--    EveryUser has a unique user id and unique username.
+
+--    those user each have an inbox in the database that stores 
+      messages they recieved from other users.
+
+--    once you friend somebody you have the ability to send that 
+      a private message.
+
+--    only the two of you can acess that chat room.
+
+--    messages should have a unique id with the time they were sent.
+      along with the users id who sent them.
+
+--    messages should follow crud operations and be able to be 
+      created, read, updated and deleted

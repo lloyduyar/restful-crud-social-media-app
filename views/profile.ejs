@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/bootstrap.css">
+  <link rel="icon" href="/finishedpictogramlogo.png" type="image/x-icon" sizes="128x128">
+  <title>Pictogram | Profile</title>
+  <style>
+    .navbar-toggler:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      word-wrap: break-word;
+    }
+
+    .profile-header {
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 10px;
+      padding: 10px;
+      border-color: black;
+    }
+
+    .user-stats {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding-top: 10%;
+    }
+
+    .user-stats .stat {
+      text-align: center;
+    }
+
+    .user-content {
+      padding: 20px;
+    }
+
+    .post {
+      margin-bottom: 20px;
+    }
+
+    #editSymbol:hover {
+      cursor: pointer;
+    }
+
+    #followers:hover {
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    #following:hover {
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    .btn-follow {
+      background-color: #007bff;
+      /* Button background color */
+      color: #fff;
+      /* Button text color */
+      border: none;
+      padding: 8px 10px;
+      /* Adjust padding as needed */
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 5vh;
+    }
+
+    .btn-follow:hover {
+      background-color: #0056b3;
+      color: white;
+      /* Change background color on hover */
+    }
+
+    .post-card {
+      max-width: 100%;
+      margin-bottom: 5vh;
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      margin: 10px 0;
+      padding: 15px;
+      background-color: white;
+      overflow-x: auto;
+    }
+
+    .post-profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .profile-image {
+      width: 40px;
+      /* Adjust as needed */
+      height: 40px;
+      /* Adjust as needed */
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .profile-info {
+      flex-grow: 1;
+    }
+
+    .post-content {
+      margin-bottom: 8px;
+    }
+
+    .post-image {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+
+    .post-hashtags {
+      color: #3498db;
+    }
+
+    .post-timestamps {
+      font-size: 0.8em;
+      color: #888;
+    }
+
+    .post-interactions {
+      margin-top: 16px;
+    }
+
+    .like-button {
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 0;
+      font-size: 1em;
+    }
+
+    .like-button:hover {
+      text-decoration: underline;
+    }
+
+    .delete-post {
+      text-decoration: none;
+    }
+
+    .likes-section {
+      color: #888;
+    }
+
+    @media (min-width: 768px) {
+      .post-card {
+        max-width: 90%;
+        margin: 16px auto;
+      }
+
+      .post-image {
+        min-width: 100%;
+      }
+    }
+
+    #newPostFooter {
+      padding-top: 10%;
+    }
+
+    .post-form {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+
+    .post-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: none;
+      /* Prevent resizing */
+      overflow: auto;
+      /* Enable scrolling when content exceeds the height */
+    }
+
+    .image-upload {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .image-upload input {
+      display: inline;
+    }
+
+    .image-upload label {
+      cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .submit-button {
+      background-color: #2ecc71;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    @keyframes pulsate {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    .new-post{
+      border-radius: 20%; 
+      animation: pulsate 2s infinite; 
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+      transition: background-color 0.3s ease-in-out;
+      background-color: transparent;
+    }
+    .new-post:hover{
+      animation-play-state: paused;
+      transition: background-color 0.3s ease-in-out;
+    }
+    #post-region{
+      animation: 2s infinite; 
+      transition: background-color 0.3s ease-in-out;
+    }
+    .post-liked{
+      background-color: lightblue;
+    }
+  </style>
+</head>
+
+<body>
+
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/feed">
+                Pictogram
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav w-100 mb-2 mg-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" href="/feed">Feed</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/profile/<%=securitySchema.username%>">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/notifications">Notifications</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/logout">Log Out</a>
+              </li>
+              <hr>
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search Users" aria-label="Search Users" style="border-radius: 0px;" id="userToSearch">
+                <button class="btn btn-outline-success" type="submit" style="border-radius: 0px;" onclick="searchUser(event)">Search</button>
+              </form>
+              <div class="search-results" style="margin: 2px;padding-left:0%; color: white;">
+               
+              </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+  </nav>
+  <div class="container">
+    <div class="profile-header">
+      <img src="<%= securitySchema.pfp %>" alt="Profile Picture" class="img-fluid profile-picture" id="uploadImage"
+        style="cursor: pointer;" onclick="openFileInput()">
+      <input type="file" id="imageInput" style="display: none;" enctype="multipart/form-data"
+        onchange="uploadProfilePicture(event)" name="file">
+      <h2 class="mt-3"><a href="/profile/<%=securitySchema.username%>" style="text-decoration: none;">
+          <%=securitySchema.username%>
+        </a></h2>
+      <h3 class="mt-3">
+        <%=securitySchema.email%>
+      </h3>
+      <p class="text-muted">
+      <div class="container bio-container">
+        <p>
+        <p class="bi bi-pen profile-bio" id="userBio" contenteditable="true" style="display: inline" data-ph="Edit">
+          <% if ( securitySchema.bio && securitySchema.bio.trim().length> 0) { %>
+            <%= securitySchema.bio %>
+              <% } else { %>
+                Type Your Bio Here!
+                <% } %>
+        </p>
+        <svg id="editSymbol" onclick="getBioContent();" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+          fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+          <path
+            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+        </svg>
+        </p>
+      </div>
+      </p>
+      <p class="text-muted">Interest: <%=securitySchema.topics%>
+      </p>
+      <p style="font-size: 15px;" class="text-muted">Joined Pictogram:
+        <%=securitySchema.timeCreatedAccount%>
+      </p>
+
+      <button class="btn btn-follow" id="followUnfollowButton" style="display: none;">
+        <% if (securitySchema.followers.includes(securitySchema.currentUser)){ %>
+          Unfollow
+          <% } else { %>
+            Follow
+            <% } %>
+      </button>
+
+      <div class="user-stats">
+        <div class="stat">
+          <strong>
+            <%=securitySchema.postsNumber%></strong>
+            <% if (securitySchema.postsNumber === 0 || securitySchema.postsNumber > 1){ %>
+              Posts
+              <% } else{ %>
+                Post
+                <% } %>
+        </div>
+        <div class="stat" id="followers" onclick="seeFollowers();">
+          <span data-bs-toggle="modal" data-bs-target="#followerModal"><strong>
+              <%=securitySchema.followers.length%>
+            </strong> <% if (securitySchema.followers.length > 1){ %>
+              Followers
+              <% } else{ %>
+                Follower
+                <% } %></span>
+        </div>
+        <div class="stat" id="following" onclick="seeFollowing();">
+          <span data-bs-toggle="modal" data-bs-target="#followingModal"><strong>
+              <%=securitySchema.following.length%>
+            </strong> Following</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:1vh;" id="post-region">
+      <button id="newPostButton" class="btn sticky-bottom" data-bs-toggle="modal" data-bs-target="#postModal"
+          style="width: 100%; border-radius: 0px;text-decoration: underline;">Create New Post</button>
+    </div>
+    <div id="postContainer">
+
+
+
+
+      <div class="post-card" id="initialPostCard" style="display: none; margin-bottom: 10%">
+        <a class="delete-post" onclick="deleteClonePost()" style="cursor: pointer; float: right; color:crimson; font-size:20px;">Delete</a>
+        <div class="post-profile">
+          <img src="" alt="user-profile" class="profile-image">
+          <div class="profile-info">
+            <div class="post-author"></div>
+            <div class="post-timestamps"></div>
+          </div>
+        </div>
+        <div class="post-content" style="/*overflow-y: scroll;*/ padding-top: 5px; padding-bottom: 10px; padding-left: 1%;">
+        </div>
+        <div id="postImage">
+          <!--<img  alt="post" class="post-image">-->
+        </div>
+        <div class="post-topics"></div>
+        <div class="post-interactions">
+          <button id="likeButton" class="likeButton btn" style="color: pink; font-size: 30px;" onclick="likePost()">&#x2764;</button>
+          <button id="likecount" class="likes-section btn" id="likeCount" style="font-size: 30px;"></button>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postFormModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm">
+        <div class="modal-content">
+          <div class="modal-body">
+
+
+            <div class="post-form">
+              <h2>Create a Post</h2>
+              <form>
+
+
+                <div class="form-group">
+                  <label for="postContent">Post Content:</label>
+                  <textarea id="postContent" name="postContent" rows="5" required></textarea>
+                  <span id="charCount">250 characters remaining</span>
+                </div>
+
+
+                <!--<div class="form-group">
+                  <label for="imageUpload">Choose Post Image (Optional):</label>
+                  <input type="file" class="form-group" id="postImageUpload" name="file" enctype="multipart/form-data" name="file"
+                  ">
+                </div>-->
+
+
+                <div class="form-group">
+                  <label for="topicsInput">Topics (hashtags):</label>
+                  <input type="text" id="topicsInput" name="topicsInput" placeholder="#ExampleTag1 #ExampleTag2">
+                </div>
+
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="checkInput();">Submit Post</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearForm();">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="followerModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 style="text-align: center;">
+              <%=securitySchema.username%>'s followers
+            </h1>
+          </div>
+          <div class="modal-body" id="followerList">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="followingModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 style="text-align: center;">users <%=securitySchema.username%> is following</h1>
+          </div>
+          <div class="modal-body" id="followingList">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="post-card" id="noPosts" style="display: none; box-shadow: none; border-style: none;">
+      <h1 style="text-align: center; color: #0d6efd;">No Post's</h1>
+    </div>
+    <script>
+      function openPost(event) {
+  const targetElement = event.target;
+  console.log(targetElement)
+  const postCardElement = targetElement.closest('.post-card');
+  console.log(postCardElement)
+  if (postCardElement) {
+    const postCardId = postCardElement.id;
+    const postUserName = postCardElement.querySelector(".username").textContent.trim();
+    console.log("Post Card ID:", postCardId);
+    console.log("Post User Name:", postUserName);
+    window.location.href = `/posts/${postUserName}/${postCardId}`;
+  }
+}
+       function elementFromHtml(html) {
+        const template = document.createElement('template');
+        template.innerHTML = html.trim();
+        return template.content.firstElementChild;
+      }
+    async function searchUser(event) {
+      try{
+        event.preventDefault();
+        const search = document.getElementById("userToSearch").value;
+        let searchQuery = await fetch("/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({search}),
+      });
+      let data = await searchQuery.json();
+    
+      
+      const newContent = document.createElement('body');
+      const newContentContent = ` 
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        Pictogram
+        <img src="/newlogo.png" alt="" width="100" height="70">Pictogram
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav w-100 mb-2 mg-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="/feed">Feed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile/<%=securitySchema.username%>">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/notifications">Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/logout">Log Out</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search Users" aria-label="Search Users"
+            style="border-radius: 0px;" id="userToSearch">
+          <button class="btn btn-outline-success" type="submit" style="border-radius: 0px;"
+            onclick="searchUser(event)">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <h1 style="text-align: center; margin-top: 5%; margin-bottom: 5%;" id="resultsHeader">No Results Found</h1>
+  <section class="search-results">
+
+  </section>
+      `
+
+
+      newContent.innerHTML = newContentContent;
+      document.body.replaceWith(newContent)
+
+      for(let i=0; i<data.results.length; i++){
+        if(data.results.length > 0){
+          document.getElementById('resultsHeader').innerText = `Results🔎 for '${data.query}'`
+        let newAppend =  
+        elementFromHtml(`<div class="container" id="${data.results[i]._id}" style="cursor:pointer;">
+          <div class="post-card" id="${data.results[i]._id}">
+            <div class="tweet-header" id="${data.results[i]._id}" >
+              <div class="user-info" id="${data.results[i]._id}">
+                <img src="data:image/jpeg;base64,${data.results[i].pfp}" alt="user-profile" class="profile-image" style="width:5vw; height:5vw;" >
+                <div class="username" style="display: inline; text-align: right; font-size: 18px; color: blue">${data.results[i].username}</div>
+              </div>
+              <div class="post-date" style="margin-top:3%;" >Joined Pictogram: ${data.results[i].timeCreated}</div>
+              <div class="post-topics" style="margin-top: 3%;" >Interest: ${data.results[i].topics}</div>
+            </div>
+            <div class="post-date" style="margin-top:3%;" >Followers: ${data.results[i].followers.length}</div>
+            <div class="post-date" style="margin-top:3%;" >Posts: ${data.results[i].posts.length}</div>
+          </div>
+        </div>`)
+        document.body.addEventListener('click', function(event) {
+  const clickedElement = event.target.closest('.post-card');
+
+  if (clickedElement) {
+    const usernameElement = clickedElement.querySelector('.username');
+    if (usernameElement) {
+      const username = usernameElement.textContent.trim();
+      window.location.href = `/profile/${username}`;
+    }
+  }
+});
+        document.body.append(newAppend)
+        }
+      }
+      console.log(data)
+
+    }catch(error){
+        console.log("Error: ", error);
+    }
+  }
+    if ("<%=securitySchema.username%>" == "<%=securitySchema.currentUser%>") {
+      document.getElementById("followUnfollowButton").style.display = "none";
+      document.getElementById("followUnfollowButton").onclick = null;
+    } else {
+      document.getElementById("uploadImage").style.cursor = "default";
+      document.getElementById("uploadImage").style.pointerEvents = "none";
+      document.getElementById("uploadImage").onclick = null;
+      document.getElementById("userBio").contentEditable = false;
+      document.getElementById("userBio").style.cursor = "default";
+      document.getElementById("userBio").pointerEvents = "none";
+      document.getElementById("editSymbol").style.display = "none";
+      document.getElementById("editSymbol").style.cursor = "default";
+      document.getElementById("editSymbol").onclick = null;
+      document.getElementById("followUnfollowButton").style.display = "inline";
+      document.querySelector(".delete-post").style.display = "none";
+      document.getElementById("newPostButton").style.display = "none";
+    }
+  async function check() {
+      let verifyPage = {
+        username: "<%=securitySchema.username%>",
+        email: "<%=securitySchema.email%>",
+        _id: "<%=securitySchema.email%>",
+      };
+    
+      let response = await fetch("/verifyProfilePage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(verifyPage),
+      });
+    
+      let data = await response.json();
+      console.log(data.canEdit);
+      if (data.canEdit === true) {
+        document.getElementById("followUnfollowButton").style.display = "none";
+        document.getElementById("followUnfollowButton").onclick = null;
+        return true;
+      } else {
+        document.getElementById("uploadImage").style.cursor = "default";
+        document.getElementById("uploadImage").style.pointerEvents = "none";
+        document.getElementById("uploadImage").onclick = null;
+        document.getElementById("userBio").contentEditable = false;
+        document.getElementById("userBio").style.cursor = "default";
+        document.getElementById("userBio").pointerEvents = "none";
+        document.getElementById("editSymbol").style.display = "none";
+        document.getElementById("editSymbol").style.cursor = "default";
+        document.getElementById("editSymbol").onclick = null;
+        document.getElementById("followUnfollowButton").style.display = "inline";
+        document.querySelector(".delete-post").style.display = "none";
+        document.querySelector(".post-card").style.display = "none";
+        return false;
+      }
+    }
+    
+    (window.onload = check()), renderPosts();
+    
+    async function renderPosts() {
+      const userToSeePost = "<%=securitySchema.username%>";
+      let response = await fetch("/renderPosts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userToSeePost: userToSeePost }),
+      });
+      let data = await response.json();
+      console.log(data.posts);
+      if (data.posts) {
+        let postArr;
+        let posts = data.posts;
+        if (data.updatedPfp.length === 0 || data.updatedPfp === undefined) {
+          dataUrl =
+            "/user-profile-2018-in-sight-user-conference-expo-business-default-png-favpng-5EdhQJprgN1HKZdx50LCN4zXg.jpg";
+        } else {
+          dataUrl = `data:image/jpeg;base64,${data.updatedPfp}`;
+        }
+        if (posts) {
+          posts.reverse();
+          for (let i = 0; i < posts.length; i++) {
+            let clonedPostCard = document
+              .getElementById("initialPostCard")
+              .cloneNode(true);
+            let id = posts[i].postId;
+            let profileImage = dataUrl;
+            let profileAuthor = posts[i].author.postCreatorUsername;
+            let postTimeStamp = posts[i].content.postTimeStamp;
+            let postContent = posts[i].content.postTextContent;
+            let postImage = posts[i].content.postImageContent;
+            let postTopics = posts[i].content.postTopics;
+            let postLikeCount = posts[i].content.postLikes.length;
+            let postComment = posts[i].content.postLikes;
+    
+            clonedPostCard.setAttribute("id", id);
+            clonedPostCard.querySelector(".profile-image").src = profileImage;
+            clonedPostCard.querySelector(".post-author").textContent =
+              profileAuthor;
+            clonedPostCard.querySelector(".post-timestamps").textContent =
+              postTimeStamp;
+            clonedPostCard.querySelector(".post-content").textContent = postContent;
+    
+            /*if(postImage.length <= 0 || postImage == " " || postImage == ""){
+              clonedPostCard.querySelector('.post-image').removeElement();
+            }else{
+              clonedPostCard.querySelector('.post-image').src = postImage;
+            }*/
+    
+            clonedPostCard.querySelector(".post-topics").textContent = postTopics;
+            clonedPostCard.querySelector(".likes-section").textContent =
+              postLikeCount;
+    
+            let secureId = document.createElement("p");
+            secureId.style.display = "none";
+            secureId.setAttribute("id", "id" + id);
+            secureId.textContent = id;
+            clonedPostCard.append(secureId);
+            if (
+              "<%=securitySchema.username%>" === "<%=securitySchema.currentUser%>"
+            ) {
+              /*let deletePostBtn = document.createElement('btn');
+            deletePostBtn.classList.add('btn')
+            deletePostBtn.classList.add('btn-primary')
+            deletePostBtn.style.cursor = "pointer";
+            deletePostBtn.style.textAlign = "right";
+            deletePostBtn.style.display = "inline";
+            deletePostBtn.textContent = "Delete Post";
+            deletePostBtn.style.fontSize = '12px';
+            clonedPostCard.append(deletePostBtn)*/
+              clonedPostCard.querySelector(".delete-post").style.display = "inline";
+              clonedPostCard.querySelector(".delete-post").setAttribute("id", id);
+            }
+            let likeButton = document.getElementById(id);
+    
+            clonedPostCard.querySelector(".likeButton").setAttribute("id", id);
+            clonedPostCard.style.display = "block";
+            clonedPostCard.addEventListener('click', (event)=> {
+              openPost(event)
+            });
+            document.getElementById("postContainer").appendChild(clonedPostCard);
+          }
+        }
+      } else {
+        document.getElementById("noPosts").style.display = "block";
+      }
+    }
+
+    function openPost(event) {
+      const targetElement = event.target;
+      const postCardElement = targetElement.closest('.post-card');
+      const eventTargetId = postCardElement.id
+
+      if (postCardElement) {
+      const postUserName = postCardElement.querySelector(".post-author").textContent.trim();
+      console.log(postUserName);
+      console.log(eventTargetId)
+      window.location.href = `/posts/${postUserName}/${eventTargetId}`
+      }
+    }
+
+
+
+    async function deleteClonePost() {
+      let postId = event.target.id;
+      console.log(postId);
+      let post = event.target;
+      console.log(post);
+      let response = await fetch("/deletePost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "<%=securitySchema.username%>",
+          postId: postId,
+        }),
+      });
+      let data = await response.json();
+      console.log(data.deleted);
+      if (data.deleted === true) {
+        let deletedDoc = postId;
+        window.location.reload();
+      }
+    }
+    function checkInput() {
+      // Get the input element
+      var inputValue = document.getElementById("postContent").value;
+      var maxValue = 250;
+    
+      if (parseInt(inputValue, 10) > maxValue) {
+        alert("Input value cannot be over " + maxValue);
+        return false;
+      }
+      submitPost();
+      return true;
+    }
+    
+    async function submitPost() {
+      event.preventDefault();
+      const currentDate = new Date();
+      const day = currentDate.getDate();
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+      const formattedDate = `${day}/${month}/${year}`;
+      let postContent = document.getElementById("postContent");
+      //let formInput = document.getElementById('postImageUpload');
+      let topics = document.getElementById("topicsInput");
+    
+      PostContentValue = postContent.value;
+      topicsValue = topics.value
+        .split(/\s+/)
+        .filter((word) => word.startsWith("#"));
+      //const fileInput = formInput
+      //const file = fileInput.files[0];
+      const formData = new FormData();
+      //formData.append('file', file);
+      formData.append(
+        "data",
+        JSON.stringify({
+          postId: undefined,
+          author: {
+            postCreatorId: "<%=securitySchema._id%>",
+            postCreatorUsername: "<%=securitySchema.username%>",
+            postCreatorPfp: "<%=securitySchema.pfp%>",
+          },
+          content: {
+            postTextContent: PostContentValue,
+            postImageContent: undefined,
+            postTimeStamp: formattedDate,
+            postLikes: [],
+            postComments: [],
+            postTopics: topicsValue,
+          },
+        })
+      );
+    
+      const promise = await fetch("/submitPost", {
+        method: "POST",
+        body: formData,
+      });
+      let data = await promise.json();
+      if (data.saved) {
+        renderPosts();
+        window.location.reload();
+      } else if (data.error) {
+        alert("Unauthorized");
+      }
+    }
+    
+    function clearForm() {
+      let postContent = document.getElementById("postContent");
+      let topics = document.getElementById("topicsInput");
+      topics.value = "";
+      postContent.value = "";
+    }
+    
+    document.getElementById("postContent").addEventListener("input", function () {
+      var maxLength = 250;
+      var currentLength = this.value.length;
+      var remaining = maxLength - currentLength + 1;
+    
+      // Update character count display
+      document.getElementById("charCount").innerText =
+        remaining + " characters remaining";
+    
+      // Limit the length of the input
+      if (currentLength > maxLength) {
+        this.value = this.value.slice(0, maxLength);
+      }
+    });
+    
+    async function seeFollowers() {
+      let followerList = document.getElementById("followerList");
+      followerList.innerHTML = "";
+    
+      const userToSeeFollowers = "<%=securitySchema.username%>";
+      const response = await fetch("/followers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userToSeeFollowers }),
+      });
+      const data = await response.json();
+      if (data) {
+        $(document).ready(function () {
+          let followerList = document.getElementById("followerList");
+          for (let i = 0; i < data.followers.length; i++) {
+            console.log(data.followers[i]);
+            let content = data.followers[i];
+            let newElement = document.createElement("div");
+            let linkContent = `<a href="/profile/${content}">${content}</a><br>`;
+            newElement.innerHTML = linkContent;
+            followerList.append(newElement);
+          }
+        });
+      }
+    }
+    
+    async function seeFollowing() {
+      let followingList = document.getElementById("followingList");
+      followingList.innerHTML = "";
+    
+      const userToSeeFollowing = "<%=securitySchema.username%>";
+      const response = await fetch("/following", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userToSeeFollowing }),
+      });
+      const data = await response.json();
+      if (data) {
+        $(document).ready(function () {
+          let followingList = document.getElementById("followingList");
+          for (let i = 0; i < data.following.length; i++) {
+            let content = data.following[i];
+            let newElement = document.createElement("div");
+            let linkContent = `<a href="/profile/${content}">${content}</a><br>`;
+            newElement.innerHTML = linkContent;
+            followingList.append(newElement);
+          }
+        });
+      }
+    }
+    
+    let followUnfollowButton = document.getElementById("followUnfollowButton");
+    followUnfollowButton.addEventListener("click", async () => {
+      const userToFollowOrUnfollow = "<%=securitySchema.username%>";
+      try {
+        const response = await fetch("/toggleFollow", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userToFollowOrUnfollow }),
+        });
+    
+        const data = await response.json();
+    
+        if (data.success) {
+          followUnfollowButton.innerText = data.following ? "Unfollow" : "Follow";
+          window.location.reload();
+        } else {
+          console.error("Error toggling follow status:", data.error);
+        }
+      } catch (error) {
+        console.error("Error toggling follow status:", error);
+      }
+    });
+    
+    function openFileInput() {
+      document.getElementById("imageInput").click();
+    }
+    async function uploadProfilePicture(event) {
+      const fileInput = event.target;
+      const file = fileInput.files[0];
+    
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+    
+        let promise = await fetch("/upload", {
+          method: "POST",
+          body: formData,
+        });
+        let data = await promise.json();
+        if (data.success) {
+          document.getElementById("uploadImage").src = "<%= securitySchema.pfp %>";
+          window.location.reload();
+        } else {
+          alert("File Too Big. Choose a file under 50kb.");
+        }
+      }
+    }
+    document
+      .getElementById("userBio")
+      .addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+        }
+      });
+    async function getBioContent() {
+      let editableContent = document.getElementById("userBio");
+      var content = editableContent.innerText;
+      let response = await fetch("/updateBio", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ bio: content }),
+      });
+      let data = await response.json();
+      if (data.msg == "success") {
+        window.location.reload();
+      } else if (data.msg == "error") {
+        alert("Maximum 100 Characters In Bio!");
+        window.location.reload()
+      }
+    }
+    
+    async function likePost() {
+      let likePostBtn = document.querySelector(".likeButton");
+      const postToLike = event.target.id;
+      console.log(postToLike);
+      try {
+        const response = await fetch("/toggleLike", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ postToLike }),
+        });
+    
+        const data = await response.json();
+        if (data) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error liking posts:", error);
+      }
+    }
+    </script>
+    <script src="/jquery.js"></script>
+    <script src="/bootstrap.bundle.js"></script>
+    <script src="/popper.min.js"></script>
+</body>
+
+</html>

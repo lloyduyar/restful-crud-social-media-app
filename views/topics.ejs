@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="icon" href="finishedpictogramlogo.png" type="image/x-icon" sizes="128x128">
+    <link rel="stylesheet" href="styles.css">
+    <title>Welcome <%=username%>, Choose topics your interested in!</title>
+    <style>
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+
+        .card {
+            text-align: center;
+        }
+        .card-img-top{
+            max-height: 20vh;
+            object-fit: cover;
+        }
+        body{
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                Pictogram
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/logout">Exit</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="topics">
+        <section id="home" class="hero">
+            <div class="container">
+                <h3>Choose some topics you are interested in!</h3>
+                <p>posts tagged with these topics will appear on your feed.</p>
+            </div>
+        </section>
+        <div class=""
+        <section id="topic-img" class="topic-img">
+            <div class="container">
+
+                <div class="card-deck">
+                    <div class="card" id="technology" onclick="select('technology');">
+                        <img class="card-img-top" src="/topics/tech.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Technology</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="science" onclick="select('science')">
+                        <img class="card-img-top" src="/topics/science.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Science</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="health" onclick="select('health')">
+                        <img class="card-img-top" src="/topics/health.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Health</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    <div class="card" id="travel" onclick="select('travel')">
+                        <img class="card-img-top" src="/topics/travel.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Travel</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="food" onclick="select('food')">
+                        <img class="card-img-top" src="/topics/food.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Food</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="fitness" onclick="select('fitness')">
+                        <img class="card-img-top" src="/topics/fitness.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Fitness</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    <div class="card" id="music" onclick="select('music')">
+                        <img class="card-img-top" src="/topics/music.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Music</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="films" onclick="select('films')">
+                        <img class="card-img-top" src="/topics/movies.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Films and Television</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="books" onclick="select('books')">
+                        <img class="card-img-top" src="/topics/books.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Literature</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    <div class="card" id="gaming" onclick="select('gaming')">
+                        <img class="card-img-top" src="/topics/gaming.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Gaming</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="art" onclick="select('art')">
+                        <img class="card-img-top" src="/topics/art.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Art</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="photography" onclick="select('photography')">
+                        <img class="card-img-top" src="/topics/photography.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Photography</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    <div class="card" id="fashion" onclick="select('fashion')">
+                        <img class="card-img-top" src="/topics/fashion.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Fashion</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="parenting" onclick="select('parenting')">
+                        <img class="card-img-top" src="/topics/parenting.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Parenting</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="relationship" onclick="select('relationship')">
+                        <img class="card-img-top" src="/topics/relationship.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Relationship</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    <div class="card" id="finance" onclick="select('finance')">
+                        <img class="card-img-top" src="/topics/finance.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Finance</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="career" onclick="select('career')">
+                        <img class="card-img-top" src="/topics/career.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Career</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="education" onclick="select('education')">
+                        <img class="card-img-top" src="/topics/education.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Education</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    <div class="card" id="mental-health" onclick="select('mental-health')">
+                        <img class="card-img-top" src="/topics/mental.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Mental Health</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="sports-athletics" onclick="select('sports-athletics')">
+                        <img class="card-img-top" src="/topics/sports.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Sports/Athletics</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="nature-wildlife" onclick="select('nature-wildlife')">
+                        <img class="card-img-top" src="/topics/nature.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Nature/Wildlife</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-deck">
+                    <div class="card" id="diy" onclick="select('diy')">
+                        <img class="card-img-top" src="/topics/diy.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">DIY</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-deck">
+                    <div class="card" id="animals" onclick="select('animals')">
+                        <img class="card-img-top" src="/topics/animals.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Animals</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="automotive" onclick="select('automotive')">
+                        <img class="card-img-top" src="/topics/automotive.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Automotive</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="politics" onclick="select('politics')">
+                        <img class="card-img-top" src="/topics/politics.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Politics</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-deck">
+                    <div class="card" id="philosophy" onclick="select('philosophy')">
+                        <img class="card-img-top" src="/topics/philosophy.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">Philosophy</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card" id="history" onclick="select('history')">
+                        <img class="card-img-top" src="/topics/history.jpg" alt="">
+                        <div class="card-body">
+                            <h3 class="card-title">History</h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+        <hr>
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; height: 100%; font-size: 20px;" onclick="sendSelections();" id="submit_topics">Submit</button>
+                    <h3 class="card-title"></h3>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <script src="app.js"></script>
+        <script src="bootstrap.bundle.js"></script>
+        <script src="validate.js"></script>
+</body>
+
+</html>

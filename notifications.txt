@@ -1,0 +1,14 @@
+make an array for each user in the database called notifications. 
+
+when you follow a user it searches the database for that users username and then stores 
+an object with the notification data like {
+    id: 
+    userid: user who the notification is for
+    triggerUser: can be null if no user caused the notification 
+    type: like or follow or comment
+    message: a text description of the notification
+    timestamp: when the notification happened.
+}
+
+
+

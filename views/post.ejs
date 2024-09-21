@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/bootstrap.css">
+  <link rel="icon" href="finishedpictogramlogo.png" type="image/x-icon" sizes="128x128">
+  <title>Welcome, to Pictogram.</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f5f8fa;
+      color: #1b2836;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .post-card {
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      margin: 10px 0;
+      padding: 15px;
+      background-color: white;
+    }
+
+    .tweet-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tweet-user {
+      font-weight: bold;
+    }
+
+    .tweet-content {
+      margin-top: 10px;
+    }
+
+    .tweet-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .tweet-action {
+      color: #657786;
+    }
+
+    .tweet-action:hover {
+      color: #1da1f2;
+      cursor: pointer;
+    }
+
+    .profile-image {
+      width: 40px;
+      /* Adjust as needed */
+      height: 40px;
+      /* Adjust as needed */
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+
+    .post-content {
+      margin-bottom: 8px;
+    }
+
+    .post-hashtags {
+      color: #3498db;
+    }
+
+    .post-timestamps {
+      font-size: 0.8em;
+      color: #888;
+    }
+
+    .post-interactions {
+      margin-top: 16px;
+    }
+
+    .like-button {
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 0;
+      font-size: 1em;
+    }
+
+    .like-button:hover {
+      text-decoration: underline;
+      color: pink;
+    }
+
+    .likes-section {
+      color: #888;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+
+
+    .profile-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .username {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .post-date {
+      font-size: 0.8em;
+      color: #888;
+    }
+    .no-more-posts-banner {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+}
+.suggested-user-label{
+  text-align: right;
+  padding-top:0px;
+  margin: 0px;
+}
+  </style>
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/feed">
+        Pictogram
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav w-100 mb-2 mg-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="/feed">Feed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile/<%=username.username%>">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/notifications">Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/logout">Log Out</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search Users" aria-label="Search Users"
+            style="border-radius: 0px;" id="userToSearch">
+          <button class="btn btn-outline-success" type="submit" style="border-radius: 0px;"
+            onclick="searchUser(event)">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+    
+  <section id="post-container">
+
+  </section>
+    
+
+    
+    <script>
+        window.onload = ()=> {
+            const postHTMLELEMENT = elementFromHtml(`<%-username.data%>`)
+            document.body.appendChild(postHTMLELEMENT);
+        }
+
+
+      function elementFromHtml(html) {
+        const template = document.createElement('template');
+        template.innerHTML = html.trim();
+        return template.content.firstElementChild;
+      }
+
+ 
+      async function likePost() {
+        let likePostBtn = document.querySelector(".likeButton");
+        const postToLike = event.target.id;
+        console.log(postToLike);
+        try {
+          const response = await fetch("/toggleLike", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ postToLike }),
+          });
+    
+          const data = await response.json();
+          if (data) {
+            window.location.reload();
+          }
+        } catch (error) {
+          console.error("Error liking posts:", error);
+        }
+      }
+    
+      function searchUser(event) {
+        event.preventDefault();
+        let user = document.getElementById("userToSearch").value;
+        console.log(user);
+        window.location.href = `/profile/${user}`;
+      }
+    </script>    
+  <script src="/bootstrap.bundle.js"></script>
+  <script src="/validate.js"></script>
+</body>
+
+</html>

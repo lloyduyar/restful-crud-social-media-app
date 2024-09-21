@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/bootstrap.css">
+  <link rel="icon" href="finishedpictogramlogo.png" type="image/x-icon" sizes="128x128">
+  <title>Welcome, to Pictogram.</title>
+  <style>
+    .profile-image {
+      width: 40px;
+      /* Adjust as needed */
+      height: 40px;
+      /* Adjust as needed */
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+
+    .post-content {
+      margin-bottom: 8px;
+    }
+
+    .post-hashtags {
+      color: #3498db;
+    }
+
+    .post-timestamps {
+      font-size: 0.8em;
+      color: #888;
+    }
+
+    .post-interactions {
+      margin-top: 16px;
+    }
+
+    .like-button {
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 0;
+      font-size: 1em;
+    }
+
+    .like-button:hover {
+      text-decoration: underline;
+      color: pink;
+    }
+
+    .likes-section {
+      color: #888;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+
+
+    .profile-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .username {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .post-date {
+      font-size: 0.8em;
+      color: #888;
+    }
+    .no-more-posts-banner {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+}
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 10px;
+      padding: 10px;
+      border-color: black;
+    }
+
+    .user-stats {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding-top: 10%;
+    }
+
+    .user-stats .stat {
+      text-align: center;
+    }
+
+    .user-content {
+      padding: 20px;
+    }
+
+    .post {
+      margin-bottom: 20px;
+    }
+
+    #editSymbol:hover {
+      cursor: pointer;
+    }
+
+    #followers:hover {
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    #following:hover {
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    .post-card {
+      max-width: 100%;
+      margin-bottom: 5vh;
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      margin: 10px 0;
+      padding: 15px;
+      background-color: white;
+      overflow-x:auto;
+    }
+
+    .post-profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .profile-image {
+      width: 40px;
+      /* Adjust as needed */
+      height: 40px;
+      /* Adjust as needed */
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  </style>
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/feed">
+       Pictogram
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav w-100 mb-2 mg-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="/feed">Feed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile/<%=securitySchema.username%>">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/notifications">Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/logout">Log Out</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search Users" aria-label="Search Users" style="border-radius: 0px;" id="userToSearch">
+          <button class="btn btn-outline-success" type="submit" style="border-radius: 0px;" onclick="searchUser(event)">Search</button>
+        </form>
+        <div class="search-results" style="margin: 2px;padding-left:0%; color: white;">
+         
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="post-feed container">
+    
+      <!--
+        navbar
+        new posts button
+
+        randomly select user posts from the database from users that you follow. UP TO 150 RANDOM POSTS
+        randomly sort posts by date but not exactly chronologically allowing some varitation.
+        check if array sent of posts is the same if true then display no new posts. on reload.
+
+
+        ALSO BELOW FOLLOWED USERS POSTS SEND AN ARRAY OF SUGGESTED POSTS. 
+        THESE POSTS ARE FROM USERS THAT ARE FOLLOWED BY PEOPLE U FOLLOW. 
+        THESE POSTS CAN ALSO BE FROM RANDOM USERS AS LONG AS THEY HAVE A TOPIC U LIKE. LIKE #TECHNOLOGY.
+        UP TO 100
+        
+        
+        
+      -->
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>
+      function elementFromHtml(html) {
+        const template = document.createElement('template');
+        template.innerHTML = html.trim();
+        return template.content.firstElementChild;
+      }
+       function elementFromHtml(html) {
+        const template = document.createElement('template');
+        template.innerHTML = html.trim();
+        return template.content.firstElementChild;
+      }
+    async function searchUser(event) {
+      try{
+        event.preventDefault();
+        const search = document.getElementById("userToSearch").value;
+        let searchQuery = await fetch("/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({search}),
+      });
+      let data = await searchQuery.json();
+    
+      
+      const newContent = document.createElement('body');
+      const newContentContent = ` 
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/feed">
+        Pictogram
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav w-100 mb-2 mg-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="/feed">Feed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile/<%=securitySchema.username%>">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/notifications">Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/logout">Log Out</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search Users" aria-label="Search Users"
+            style="border-radius: 0px;" id="userToSearch">
+          <button class="btn btn-outline-success" type="submit" style="border-radius: 0px;"
+            onclick="searchUser(event)">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <h1 style="text-align: center; margin-top: 5%; margin-bottom: 5%;" id="resultsHeader">No Results Found</h1>
+  <section class="search-results">
+
+  </section>
+      `
+
+
+      newContent.innerHTML = newContentContent;
+      document.body.replaceWith(newContent)
+
+      for(let i=0; i<data.results.length; i++){
+        if(data.results.length > 0){
+          document.getElementById('resultsHeader').innerText = `Results🔎 for '${data.query}'`
+        let newAppend =  
+        elementFromHtml(`<div class="container" id="${data.results[i]._id}" style="cursor:pointer;">
+          <div class="post-card" id="${data.results[i]._id}">
+            <div class="tweet-header" id="${data.results[i]._id}" >
+              <div class="user-info" id="${data.results[i]._id}">
+                <img src="data:image/jpeg;base64,${data.results[i].pfp}" alt="user-profile" class="profile-image" style="width:5vw; height:5vw;" >
+                <div class="username" style="display: inline; text-align: right; font-size: 18px; color: blue">${data.results[i].username}</div>
+              </div>
+              <div class="post-date" style="margin-top:3%;" >Joined Pictogram: ${data.results[i].timeCreated}</div>
+              <div class="post-topics" style="margin-top: 3%;" >Interest: ${data.results[i].topics}</div>
+            </div>
+            <div class="post-date" style="margin-top:3%;" >Followers: ${data.results[i].followers.length}</div>
+            <div class="post-date" style="margin-top:3%;" >Posts: ${data.results[i].posts.length}</div>
+          </div>
+        </div>`)
+        document.body.addEventListener('click', function(event) {
+  const clickedElement = event.target.closest('.post-card');
+
+  if (clickedElement) {
+    const usernameElement = clickedElement.querySelector('.username');
+    if (usernameElement) {
+      const username = usernameElement.textContent.trim();
+      window.location.href = `/profile/${username}`;
+    }
+  }
+});
+        document.body.append(newAppend)
+        }
+      }
+      console.log(data)
+
+    }catch(error){
+        console.log("Error: ", error);
+    }
+  }
+    
+      window.onload = getPosts();
+    
+      async function getPosts() {
+        let user = '<%=securitySchema.username%>';
+        let response = await fetch('/getfeed', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user: user }),
+        });
+    
+        let data = await response.json();
+    
+        if (data && data.followerPosts && data.followerPosts.length > 0) {
+          displayPosts(data.followerPosts, "Follower Posts", true);
+        }
+    
+        if (data && data.followedPosts && data.followedPosts.length > 0) {
+          displayPosts(data.followedPosts, "Followed Posts", false);
+        }
+    
+        const noMore = elementFromHtml(`<div id="no-more-posts-banner" style="display: block; text-align: center; padding: 10px;">
+          No more posts
+        </div>`);
+        document.body.append(noMore);
+      }
+    
+      
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[i], array[j]];
+    }
+    return array;
+  }
+
+  function displayPosts(posts, title, isFollower) {
+    console.log(`${title}:`, posts);
+
+    // Add a flag to each post to identify whether it's a suggested user post
+    const postsWithFlag = posts.map(post => ({ ...post, isSuggestedUser: isFollower }));
+
+    // Shuffle the array of posts
+    const shuffledPosts = shuffleArray(postsWithFlag);
+
+    for (let i = 0; i < shuffledPosts.length; i++) {
+      let hr = document.createElement('hr');
+
+      const postTemplate = elementFromHtml(`
+        <div class="container" class="post-card" id="${shuffledPosts[i].postId}">
+          <div class="post-card" id="${shuffledPosts[i].postId}">
+            <div class="tweet-header">
+              <div class="user-info">
+                <img src="${shuffledPosts[i].author.postCreatorPfp}" alt="user-profile" class="profile-image">
+                <div class="username">${shuffledPosts[i].author.postCreatorUsername}</div>
+                ${shuffledPosts[i].isSuggestedUser ? '<div class="suggested-user-label">Suggested Post</div>' : ''}
+              </div>
+              <div class="post-date">${shuffledPosts[i].content.postTimeStamp}</div>
+            </div>
+            <div class="tweet-content" style="margin-top: 5%; margin-left: 2%;">
+              ${shuffledPosts[i].content.postTextContent}
+            </div>
+            <div id="postImage">
+              <!--<img alt="post" class="post-image">-->
+            </div>
+            <div class="post-topics" style="margin-left: 2%;">${shuffledPosts[i].content.postTopics}</div>
+            <div class="post-interactions">
+              <button id="${shuffledPosts[i].postId}" class="likeButton btn" style="color: #657786; font-size: 20px;"
+                onclick="likePost()">&#x2764;</button>
+              <button id="likecount" class="likes-section btn" id="likeCount"
+                style="font-size: 30px;">${shuffledPosts[i].content.postLikes.length}</button>
+            </div>
+          </div>
+        </div>
+      `);
+      postTemplate.addEventListener('click', (event)=> {
+              openPost(event)
+            });
+      document.body.appendChild(postTemplate);
+    }
+  }
+
+  function openPost(event) {
+  const targetElement = event.target;
+  const postCardElement = targetElement.closest('.post-card');
+  if (postCardElement) {
+    const postCardId = postCardElement.id;
+    const postUserName = postCardElement.querySelector(".username").textContent.trim();
+    console.log("Post Card ID:", postCardId);
+    console.log("Post User Name:", postUserName);
+    window.location.href = `/posts/${postUserName}/${postCardId}`;
+  }
+}
+
+
+  const reload = elementFromHtml(`<div id="" style="display: block; text-align: center; padding: 10px; padding-top:10px;font-size: 20px;">
+          Reload To Refresh Posts!
+        </div>`);
+        document.body.append(reload);
+    
+      async function likePost() {
+        let likePostBtn = document.querySelector(".likeButton");
+        const postToLike = event.target.id;
+        console.log(postToLike);
+        try {
+          const response = await fetch("/toggleLike", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ postToLike }),
+          });
+    
+          const data = await response.json();
+          if (data) {
+            window.location.reload();
+          }
+        } catch (error) {
+          console.error("Error liking posts:", error);
+        }
+      }
+    </script>    
+</section>
+<script src="/jquery.js"></script>
+<script src="/bootstrap.bundle.js"></script>
+<script src="/popper.min.js"></script>
+  <script src="/validate.js"></script>
+</body>
+
+</html>
